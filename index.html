@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finishing Weight Shortage Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .calculator {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .results {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            color: white;
+        }
+        
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .result-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .result-value {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .percentage-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>🎯 Finishing Weight Shortage Calculator</h1>
+        
+        <div class="input-group">
+            <label for="beforeWeight">Weight Before Finishing (kg)</label>
+            <input type="number" id="beforeWeight" step="0.001" placeholder="e.g., 22.370">
+        </div>
+        
+        <div class="input-group">
+            <label for="afterWeight">Weight After Finishing (kg)</label>
+            <input type="number" id="afterWeight" step="0.001" placeholder="e.g., 18.970">
+        </div>
+        
+        <div id="results" class="results hidden">
+            <div class="result-row">
+                <span class="result-label">Shortage</span>
+                <span class="result-value" id="shortage">0.000 kg</span>
+            </div>
+            <div class="result-row">
+                <span class="result-label">Shortage Percentage</span>
+                <span class="percentage-badge" id="percentage">0.00%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const beforeInput = document.getElementById('beforeWeight');
+        const afterInput = document.getElementById('afterWeight');
+        const resultsDiv = document.getElementById('results');
+        const shortageSpan = document.getElementById('shortage');
+        const percentageSpan = document.getElementById('percentage');
+
+        function calculate() {
+            const before = parseFloat(beforeInput.value);
+            const after = parseFloat(afterInput.value);
+            
+            if (before > 0 && after >= 0 && after <= before) {
+                const shortage = before - after;
+                const percentage = (shortage / before) * 100;
+                
+                shortageSpan.textContent = shortage.toFixed(3) + ' kg';
+                percentageSpan.textContent = percentage.toFixed(2) + '%';
+                
+                resultsDiv.classList.remove('hidden');
+            } else {
+                resultsDiv.classList.add('hidden');
+            }
+        }
+
+        beforeInput.addEventListener('input', calculate);
+        afterInput.addEventListener('input', calculate);
+    </script>
+</body>
+</html>
