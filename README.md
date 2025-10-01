@@ -1,2 +1,2 @@
-# ME---Shortage-calculator
+# ME-calculator
 Maurya Exports Weight shortage calculator for finishing process
