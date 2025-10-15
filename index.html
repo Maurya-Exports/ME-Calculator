@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textile Calculators - Complete Suite</title>
+    <title>Maurya Exports - Textile Calculators</title>
     <style>
         * {
             margin: 0;
@@ -13,9 +13,33 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #a8d8ea 0%, #d4e8f5 100%);
             min-height: 100vh;
             padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 16px;
         }
         
         .container {
@@ -31,7 +55,7 @@
             margin-bottom: 30px;
         }
         
-        h1 {
+        h2 {
             color: #333;
             text-align: center;
             margin-bottom: 25px;
@@ -61,12 +85,12 @@
         
         input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #5ca9d6;
+            box-shadow: 0 0 0 3px rgba(92, 169, 214, 0.1);
         }
         
         .results {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #5ca9d6 0%, #4a8bb8 100%);
             border-radius: 15px;
             padding: 25px;
             margin-top: 25px;
@@ -111,11 +135,15 @@
         }
         
         @media (max-width: 600px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
             .calculator {
                 padding: 25px;
             }
             
-            h1 {
+            h2 {
                 font-size: 20px;
             }
             
@@ -130,90 +158,14 @@
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Maurya Exports</h1>
+        <p>Textile Calculators - Complete Suite</p>
+    </div>
+
     <div class="container">
-        <!-- Calculator 1: Finishing Weight Shortage -->
-        <div class="calculator">
-            <h1>🎯 Weight Shortage Calculator</h1>
-            
-            <div class="input-group">
-                <label for="beforeWeight">Weight Before Finishing (kg)</label>
-                <input type="number" id="beforeWeight" step="0.001" placeholder="e.g., 22.370">
-            </div>
-            
-            <div class="input-group">
-                <label for="afterWeight">Weight After Finishing (kg)</label>
-                <input type="number" id="afterWeight" step="0.001" placeholder="e.g., 18.970">
-            </div>
-            
-            <div id="results1" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Shortage</span>
-                    <span class="result-value" id="shortage">0.000 kg</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Shortage Percentage</span>
-                    <span class="percentage-badge" id="percentage">0.00%</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculator 2: GSM Calculator -->
-        <div class="calculator">
-            <h1>📏 GSM Calculator</h1>
-            
-            <div class="input-group">
-                <label for="gsmWeight">Weight (kg)</label>
-                <input type="number" id="gsmWeight" step="0.001" placeholder="e.g., 22.230">
-            </div>
-            
-            <div class="input-group">
-                <label for="gsmWidth">Width (inches)</label>
-                <input type="number" id="gsmWidth" step="0.001" placeholder="e.g., 62">
-            </div>
-            
-            <div class="input-group">
-                <label for="gsmLength">Length (meters)</label>
-                <input type="number" id="gsmLength" step="0.001" placeholder="e.g., 33.345">
-            </div>
-            
-            <div id="results2" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">GSM</span>
-                    <span class="result-value" id="gsmValue">0</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculator 3: Weight Calculator -->
-        <div class="calculator">
-            <h1>⚖️ Weight Calculator</h1>
-            
-            <div class="input-group">
-                <label for="inputGSM">GSM</label>
-                <input type="number" id="inputGSM" step="0.001" placeholder="e.g., 320">
-            </div>
-            
-            <div class="input-group">
-                <label for="weightWidth">Width (inches)</label>
-                <input type="number" id="weightWidth" step="0.001" placeholder="e.g., 72">
-            </div>
-            
-            <div class="input-group">
-                <label for="weightLength">Length (meters)</label>
-                <input type="number" id="weightLength" step="0.001" placeholder="e.g., 12">
-            </div>
-            
-            <div id="results3" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Weight</span>
-                    <span class="result-value" id="weightValue">0.00 kg</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Calculator 4: Length Calculator -->
-        <div class="calculator">
-            <h1>📐 Length Calculator</h1>
+         <div class="calculator">
+            <h2>📐 Length Calculator</h2>
             
             <div class="input-group">
                 <label for="lengthGSM">GSM</label>
@@ -230,7 +182,7 @@
                 <input type="number" id="lengthWeight" step="0.001" placeholder="e.g., 15">
             </div>
             
-            <div id="results4" class="results hidden">
+            <div id="results1" class="results hidden">
                 <div class="result-row">
                     <span class="result-label">Length</span>
                     <span class="result-value" id="lengthValue">0.00 m</span>
@@ -238,9 +190,89 @@
             </div>
         </div>
 
+        <!-- Calculator 2: Weight Shortage Calculator -->
+        <div class="calculator">
+            <h2>🎯 Weight Shortage Calculator</h2>
+            
+            <div class="input-group">
+                <label for="beforeWeight">Weight Before Finishing (kg)</label>
+                <input type="number" id="beforeWeight" step="0.001" placeholder="e.g., 22.370">
+            </div>
+            
+            <div class="input-group">
+                <label for="afterWeight">Weight After Finishing (kg)</label>
+                <input type="number" id="afterWeight" step="0.001" placeholder="e.g., 18.970">
+            </div>
+            
+            <div id="results2" class="results hidden">
+                <div class="result-row">
+                    <span class="result-label">Shortage</span>
+                    <span class="result-value" id="shortage">0.000 kg</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Shortage Percentage</span>
+                    <span class="percentage-badge" id="percentage">0.00%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator 3: GSM Calculator -->
+        <div class="calculator">
+            <h2>📏 GSM Calculator</h2>
+            
+            <div class="input-group">
+                <label for="gsmWeight">Weight (kg)</label>
+                <input type="number" id="gsmWeight" step="0.001" placeholder="e.g., 22.230">
+            </div>
+            
+            <div class="input-group">
+                <label for="gsmWidth">Width (inches)</label>
+                <input type="number" id="gsmWidth" step="0.001" placeholder="e.g., 62">
+            </div>
+            
+            <div class="input-group">
+                <label for="gsmLength">Length (meters)</label>
+                <input type="number" id="gsmLength" step="0.001" placeholder="e.g., 33.345">
+            </div>
+            
+            <div id="results3" class="results hidden">
+                <div class="result-row">
+                    <span class="result-label">GSM</span>
+                    <span class="result-value" id="gsmValue">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator 4: Weight Calculator -->
+        <div class="calculator">
+            <h2>⚖️ Weight Calculator</h2>
+            
+            <div class="input-group">
+                <label for="inputGSM">GSM</label>
+                <input type="number" id="inputGSM" step="0.001" placeholder="e.g., 320">
+            </div>
+            
+            <div class="input-group">
+                <label for="weightWidth">Width (inches)</label>
+                <input type="number" id="weightWidth" step="0.001" placeholder="e.g., 72">
+            </div>
+            
+            <div class="input-group">
+                <label for="weightLength">Length (meters)</label>
+                <input type="number" id="weightLength" step="0.001" placeholder="e.g., 12">
+            </div>
+            
+            <div id="results4" class="results hidden">
+                <div class="result-row">
+                    <span class="result-label">Weight</span>
+                    <span class="result-value" id="weightValue">0.00 kg</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Calculator 5: Width Calculator -->
         <div class="calculator">
-            <h1>📊 Width Calculator</h1>
+            <h2>📊 Width Calculator</h2>
             
             <div class="input-group">
                 <label for="widthGSM">GSM</label>
@@ -267,96 +299,11 @@
     </div>
 
     <script>
-        // Calculator 1: Finishing Weight Shortage
-        const beforeInput = document.getElementById('beforeWeight');
-        const afterInput = document.getElementById('afterWeight');
-        const results1Div = document.getElementById('results1');
-        const shortageSpan = document.getElementById('shortage');
-        const percentageSpan = document.getElementById('percentage');
-
-        function calculateShortage() {
-            const before = parseFloat(beforeInput.value);
-            const after = parseFloat(afterInput.value);
-            
-            if (before > 0 && after >= 0 && after <= before) {
-                const shortage = before - after;
-                const percentage = (shortage / before) * 100;
-                
-                shortageSpan.textContent = shortage.toFixed(3) + ' kg';
-                percentageSpan.textContent = percentage.toFixed(2) + '%';
-                
-                results1Div.classList.remove('hidden');
-            } else {
-                results1Div.classList.add('hidden');
-            }
-        }
-
-        beforeInput.addEventListener('input', calculateShortage);
-        afterInput.addEventListener('input', calculateShortage);
-
-        // Calculator 2: GSM Calculator
-        const gsmWeightInput = document.getElementById('gsmWeight');
-        const gsmWidthInput = document.getElementById('gsmWidth');
-        const gsmLengthInput = document.getElementById('gsmLength');
-        const results2Div = document.getElementById('results2');
-        const gsmValueSpan = document.getElementById('gsmValue');
-
-        function calculateGSM() {
-            const weight = parseFloat(gsmWeightInput.value);
-            const width = parseFloat(gsmWidthInput.value);
-            const length = parseFloat(gsmLengthInput.value);
-            
-            if (weight > 0 && width > 0 && length > 0) {
-                const numerator = weight * 1000 * 100;
-                const denominator = width * 2.54 * length;
-                const gsm = numerator / denominator;
-                
-                gsmValueSpan.textContent = Math.round(gsm);
-                
-                results2Div.classList.remove('hidden');
-            } else {
-                results2Div.classList.add('hidden');
-            }
-        }
-
-        gsmWeightInput.addEventListener('input', calculateGSM);
-        gsmWidthInput.addEventListener('input', calculateGSM);
-        gsmLengthInput.addEventListener('input', calculateGSM);
-
-        // Calculator 3: Weight Calculator
-        const inputGSMInput = document.getElementById('inputGSM');
-        const weightWidthInput = document.getElementById('weightWidth');
-        const weightLengthInput = document.getElementById('weightLength');
-        const results3Div = document.getElementById('results3');
-        const weightValueSpan = document.getElementById('weightValue');
-
-        function calculateWeight() {
-            const gsm = parseFloat(inputGSMInput.value);
-            const width = parseFloat(weightWidthInput.value);
-            const length = parseFloat(weightLengthInput.value);
-            
-            if (gsm > 0 && width > 0 && length > 0) {
-                const numerator = gsm * width * 2.54 * length;
-                const denominator = 1000 * 100;
-                const weight = numerator / denominator;
-                
-                weightValueSpan.textContent = weight.toFixed(2) + ' kg';
-                
-                results3Div.classList.remove('hidden');
-            } else {
-                results3Div.classList.add('hidden');
-            }
-        }
-
-        inputGSMInput.addEventListener('input', calculateWeight);
-        weightWidthInput.addEventListener('input', calculateWeight);
-        weightLengthInput.addEventListener('input', calculateWeight);
-
-        // Calculator 4: Length Calculator
+        // Calculator 1: Length Calculator (NOW FIRST)
         const lengthGSMInput = document.getElementById('lengthGSM');
         const lengthWidthInput = document.getElementById('lengthWidth');
         const lengthWeightInput = document.getElementById('lengthWeight');
-        const results4Div = document.getElementById('results4');
+        const results1Div = document.getElementById('results1');
         const lengthValueSpan = document.getElementById('lengthValue');
 
         function calculateLength() {
@@ -371,15 +318,100 @@
                 
                 lengthValueSpan.textContent = length.toFixed(2) + ' m';
                 
-                results4Div.classList.remove('hidden');
+                results1Div.classList.remove('hidden');
             } else {
-                results4Div.classList.add('hidden');
+                results1Div.classList.add('hidden');
             }
         }
 
         lengthGSMInput.addEventListener('input', calculateLength);
         lengthWidthInput.addEventListener('input', calculateLength);
         lengthWeightInput.addEventListener('input', calculateLength);
+
+        // Calculator 2: Finishing Weight Shortage
+        const beforeInput = document.getElementById('beforeWeight');
+        const afterInput = document.getElementById('afterWeight');
+        const results2Div = document.getElementById('results2');
+        const shortageSpan = document.getElementById('shortage');
+        const percentageSpan = document.getElementById('percentage');
+
+        function calculateShortage() {
+            const before = parseFloat(beforeInput.value);
+            const after = parseFloat(afterInput.value);
+            
+            if (before > 0 && after >= 0 && after <= before) {
+                const shortage = before - after;
+                const percentage = (shortage / before) * 100;
+                
+                shortageSpan.textContent = shortage.toFixed(3) + ' kg';
+                percentageSpan.textContent = percentage.toFixed(2) + '%';
+                
+                results2Div.classList.remove('hidden');
+            } else {
+                results2Div.classList.add('hidden');
+            }
+        }
+
+        beforeInput.addEventListener('input', calculateShortage);
+        afterInput.addEventListener('input', calculateShortage);
+
+        // Calculator 3: GSM Calculator
+        const gsmWeightInput = document.getElementById('gsmWeight');
+        const gsmWidthInput = document.getElementById('gsmWidth');
+        const gsmLengthInput = document.getElementById('gsmLength');
+        const results3Div = document.getElementById('results3');
+        const gsmValueSpan = document.getElementById('gsmValue');
+
+        function calculateGSM() {
+            const weight = parseFloat(gsmWeightInput.value);
+            const width = parseFloat(gsmWidthInput.value);
+            const length = parseFloat(gsmLengthInput.value);
+            
+            if (weight > 0 && width > 0 && length > 0) {
+                const numerator = weight * 1000 * 100;
+                const denominator = width * 2.54 * length;
+                const gsm = numerator / denominator;
+                
+                gsmValueSpan.textContent = Math.round(gsm);
+                
+                results3Div.classList.remove('hidden');
+            } else {
+                results3Div.classList.add('hidden');
+            }
+        }
+
+        gsmWeightInput.addEventListener('input', calculateGSM);
+        gsmWidthInput.addEventListener('input', calculateGSM);
+        gsmLengthInput.addEventListener('input', calculateGSM);
+
+        // Calculator 4: Weight Calculator
+        const inputGSMInput = document.getElementById('inputGSM');
+        const weightWidthInput = document.getElementById('weightWidth');
+        const weightLengthInput = document.getElementById('weightLength');
+        const results4Div = document.getElementById('results4');
+        const weightValueSpan = document.getElementById('weightValue');
+
+        function calculateWeight() {
+            const gsm = parseFloat(inputGSMInput.value);
+            const width = parseFloat(weightWidthInput.value);
+            const length = parseFloat(weightLengthInput.value);
+            
+            if (gsm > 0 && width > 0 && length > 0) {
+                const numerator = gsm * width * 2.54 * length;
+                const denominator = 1000 * 100;
+                const weight = numerator / denominator;
+                
+                weightValueSpan.textContent = weight.toFixed(2) + ' kg';
+                
+                results4Div.classList.remove('hidden');
+            } else {
+                results4Div.classList.add('hidden');
+            }
+        }
+
+        inputGSMInput.addEventListener('input', calculateWeight);
+        weightWidthInput.addEventListener('input', calculateWeight);
+        weightLengthInput.addEventListener('input', calculateWeight);
 
         // Calculator 5: Width Calculator
         const widthGSMInput = document.getElementById('widthGSM');
