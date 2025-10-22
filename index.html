@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maurya Exports - Textile Calculators</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #a8d8ea 0%, #d4e8f5 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         .header {
             background: white;
             border-radius: 20px;
@@ -29,24 +23,20 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
         .header h1 {
             color: #2c5aa0;
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 5px;
         }
-        
         .header p {
             color: #666;
             font-size: 16px;
         }
-        
         .container {
             max-width: 500px;
             margin: 0 auto;
         }
-        
         .calculator {
             background: white;
             border-radius: 20px;
@@ -54,18 +44,13 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             margin-bottom: 30px;
         }
-        
         h2 {
             color: #333;
             text-align: center;
             margin-bottom: 25px;
             font-size: 22px;
         }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
+        .input-group { margin-bottom: 20px; }
         label {
             display: block;
             color: #555;
@@ -73,8 +58,7 @@
             margin-bottom: 8px;
             font-size: 14px;
         }
-        
-        input {
+        input, select {
             width: 100%;
             padding: 15px;
             border: 2px solid #e0e0e0;
@@ -82,22 +66,19 @@
             font-size: 16px;
             transition: all 0.3s;
         }
-        
-        input:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: #5ca9d6;
             box-shadow: 0 0 0 3px rgba(92, 169, 214, 0.1);
         }
-        
-        .results {
+        .results, .loading-results {
             background: linear-gradient(135deg, #5ca9d6 0%, #4a8bb8 100%);
             border-radius: 15px;
             padding: 25px;
             margin-top: 25px;
             color: white;
         }
-        
-        .result-row {
+        .result-row, .loading-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -105,23 +86,19 @@
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .result-row:last-child {
+        .result-row:last-child, .loading-row:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-        
-        .result-label {
+        .result-label, .loading-label {
             font-size: 14px;
             opacity: 0.9;
         }
-        
-        .result-value {
+        .result-value, .loading-value {
             font-size: 24px;
             font-weight: bold;
         }
-        
         .percentage-badge {
             background: rgba(255, 255, 255, 0.2);
             padding: 5px 15px;
@@ -129,31 +106,72 @@
             font-size: 18px;
             font-weight: bold;
         }
-        
-        .hidden {
-            display: none;
+        .hidden { display: none; }
+        /* Container Loading Specific Styles */
+        .unit-system { display: flex; gap: 10px; margin-top: 10px; }
+        .unit-btn { flex: 1; padding: 10px; border: 2px solid #e0e0e0; background: white; border-radius: 8px; cursor: pointer; font-weight: 500; transition: all 0.2s;}
+        .unit-btn.active { background: #5ca9d6; color: white; border-color: #5ca9d6;}
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-        
+        .spec-item {
+            background: #f2faff;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        .spec-label { color: #86868b; font-size: 0.95rem; }
+        .spec-value { font-weight: 600; color: #1d1d1f;}
+        .spec-subtitle { font-size: 0.75rem; color: #86868b; font-style: italic; margin-top: 2px;}
+        .error-box {
+            background: #ffe4e4;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ff4444;
+        }
+        .error-box h3 {
+            color: #ff4444;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+        .error-box p {
+            color: #424245;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        .details-grid { display: grid; gap: 10px;}
+        .detail-row { display: flex; justify-content: space-between; padding: 12px; background: #f9f9fb; border-radius: 8px;}
+        .detail-label { color: #86868b;}
+        .detail-value { font-weight: 600; color: #1d1d1f;}
+        .packing-layout { background: #e8f5f7; padding: 20px; border-radius: 10px; margin-bottom: 20px;}
+        .packing-layout h3 { margin-bottom: 15px; color: #1d1d1f; font-size: 1.1rem;}
+        .packing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px;}
+        .packing-item { background: white; padding: 15px; border-radius: 8px;}
+        .packing-label { font-size: 0.85rem; color: #86868b; margin-bottom: 5px;}
+        .packing-value { font-size: 1.5rem; font-weight: 700; color: #1d1d1f;}
+        .insight-box {
+            background: #e8e6f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #5ca9d6;
+            color: #28587b;
+        }
+        .insight-box h3 { color: #5ca9d6; margin-bottom: 10px; font-size: 1.1rem;}
+        .insight-box p { color: #424245; line-height: 1.5; font-size: 0.95rem;}
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 24px;
-            }
-            
-            .calculator {
-                padding: 25px;
-            }
-            
-            h2 {
-                font-size: 20px;
-            }
-            
-            .result-value {
-                font-size: 20px;
-            }
-            
-            input {
-                padding: 12px;
-            }
+            .header h1 { font-size: 24px; }
+            .calculator { padding: 25px; }
+            h2 { font-size: 20px; }
+            .result-value, .loading-value { font-size: 20px; }
+            input, select { padding: 12px; }
+            .specs-grid { grid-template-columns: 1fr; }
+            .packing-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -162,144 +180,147 @@
         <h1>Maurya Exports</h1>
         <p>Textile Calculators - Complete Suite</p>
     </div>
-
     <div class="container">
-         <div class="calculator">
+        <!-- 1-5: Original Calculators -->
+        <div class="calculator">
             <h2>📐 Length Calculator</h2>
-            
-            <div class="input-group">
-                <label for="lengthGSM">GSM</label>
-                <input type="number" id="lengthGSM" step="0.001" placeholder="e.g., 320">
-            </div>
-            
-            <div class="input-group">
-                <label for="lengthWidth">Width (inches)</label>
-                <input type="number" id="lengthWidth" step="0.001" placeholder="e.g., 72">
-            </div>
-            
-            <div class="input-group">
-                <label for="lengthWeight">Weight (kg)</label>
-                <input type="number" id="lengthWeight" step="0.001" placeholder="e.g., 15">
-            </div>
-            
-            <div id="results1" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Length</span>
-                    <span class="result-value" id="lengthValue">0.00 m</span>
-                </div>
-            </div>
+            <div class="input-group"><label for="lengthGSM">GSM</label><input type="number" id="lengthGSM" step="0.001" placeholder="e.g., 320"></div>
+            <div class="input-group"><label for="lengthWidth">Width (inches)</label><input type="number" id="lengthWidth" step="0.001" placeholder="e.g., 72"></div>
+            <div class="input-group"><label for="lengthWeight">Weight (kg)</label><input type="number" id="lengthWeight" step="0.001" placeholder="e.g., 15"></div>
+            <div id="results1" class="results hidden"><div class="result-row"><span class="result-label">Length</span><span class="result-value" id="lengthValue">0.00 m</span></div></div>
         </div>
-
-        <!-- Calculator 2: Weight Shortage Calculator -->
         <div class="calculator">
             <h2>🎯 Weight Shortage Calculator</h2>
-            
-            <div class="input-group">
-                <label for="beforeWeight">Weight Before Finishing (kg)</label>
-                <input type="number" id="beforeWeight" step="0.001" placeholder="e.g., 22.370">
-            </div>
-            
-            <div class="input-group">
-                <label for="afterWeight">Weight After Finishing (kg)</label>
-                <input type="number" id="afterWeight" step="0.001" placeholder="e.g., 18.970">
-            </div>
-            
+            <div class="input-group"><label for="beforeWeight">Weight Before Finishing (kg)</label><input type="number" id="beforeWeight" step="0.001" placeholder="e.g., 22.370"></div>
+            <div class="input-group"><label for="afterWeight">Weight After Finishing (kg)</label><input type="number" id="afterWeight" step="0.001" placeholder="e.g., 18.970"></div>
             <div id="results2" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Shortage</span>
-                    <span class="result-value" id="shortage">0.000 kg</span>
-                </div>
-                <div class="result-row">
-                    <span class="result-label">Shortage Percentage</span>
-                    <span class="percentage-badge" id="percentage">0.00%</span>
-                </div>
+                <div class="result-row"><span class="result-label">Shortage</span><span class="result-value" id="shortage">0.000 kg</span></div>
+                <div class="result-row"><span class="result-label">Shortage Percentage</span><span class="percentage-badge" id="percentage">0.00%</span></div>
             </div>
         </div>
-
-        <!-- Calculator 3: GSM Calculator -->
         <div class="calculator">
             <h2>📏 GSM Calculator</h2>
-            
-            <div class="input-group">
-                <label for="gsmWeight">Weight (kg)</label>
-                <input type="number" id="gsmWeight" step="0.001" placeholder="e.g., 22.230">
-            </div>
-            
-            <div class="input-group">
-                <label for="gsmWidth">Width (inches)</label>
-                <input type="number" id="gsmWidth" step="0.001" placeholder="e.g., 62">
-            </div>
-            
-            <div class="input-group">
-                <label for="gsmLength">Length (meters)</label>
-                <input type="number" id="gsmLength" step="0.001" placeholder="e.g., 33.345">
-            </div>
-            
-            <div id="results3" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">GSM</span>
-                    <span class="result-value" id="gsmValue">0</span>
-                </div>
-            </div>
+            <div class="input-group"><label for="gsmWeight">Weight (kg)</label><input type="number" id="gsmWeight" step="0.001" placeholder="e.g., 22.230"></div>
+            <div class="input-group"><label for="gsmWidth">Width (inches)</label><input type="number" id="gsmWidth" step="0.001" placeholder="e.g., 62"></div>
+            <div class="input-group"><label for="gsmLength">Length (meters)</label><input type="number" id="gsmLength" step="0.001" placeholder="e.g., 33.345"></div>
+            <div id="results3" class="results hidden"><div class="result-row"><span class="result-label">GSM</span><span class="result-value" id="gsmValue">0</span></div></div>
         </div>
-
-        <!-- Calculator 4: Weight Calculator -->
         <div class="calculator">
             <h2>⚖️ Weight Calculator</h2>
-            
-            <div class="input-group">
-                <label for="inputGSM">GSM</label>
-                <input type="number" id="inputGSM" step="0.001" placeholder="e.g., 320">
-            </div>
-            
-            <div class="input-group">
-                <label for="weightWidth">Width (inches)</label>
-                <input type="number" id="weightWidth" step="0.001" placeholder="e.g., 72">
-            </div>
-            
-            <div class="input-group">
-                <label for="weightLength">Length (meters)</label>
-                <input type="number" id="weightLength" step="0.001" placeholder="e.g., 12">
-            </div>
-            
-            <div id="results4" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Weight</span>
-                    <span class="result-value" id="weightValue">0.00 kg</span>
-                </div>
-            </div>
+            <div class="input-group"><label for="inputGSM">GSM</label><input type="number" id="inputGSM" step="0.001" placeholder="e.g., 320"></div>
+            <div class="input-group"><label for="weightWidth">Width (inches)</label><input type="number" id="weightWidth" step="0.001" placeholder="e.g., 72"></div>
+            <div class="input-group"><label for="weightLength">Length (meters)</label><input type="number" id="weightLength" step="0.001" placeholder="e.g., 12"></div>
+            <div id="results4" class="results hidden"><div class="result-row"><span class="result-label">Weight</span><span class="result-value" id="weightValue">0.00 kg</span></div></div>
         </div>
-
-        <!-- Calculator 5: Width Calculator -->
         <div class="calculator">
             <h2>📊 Width Calculator</h2>
-            
+            <div class="input-group"><label for="widthGSM">GSM</label><input type="number" id="widthGSM" step="0.001" placeholder="e.g., 320"></div>
+            <div class="input-group"><label for="widthWeight">Weight (kg)</label><input type="number" id="widthWeight" step="0.001" placeholder="e.g., 15"></div>
+            <div class="input-group"><label for="widthLength">Length (meters)</label><input type="number" id="widthLength" step="0.001" placeholder="e.g., 22"></div>
+            <div id="results5" class="results hidden"><div class="result-row"><span class="result-label">Width</span><span class="result-value" id="widthValue">0.00 in</span></div></div>
+        </div>
+        <!-- 6: FULL Container Loading Calculator -->
+        <div class="calculator">
+            <h2>🚢 Container Loading Calculator</h2>
             <div class="input-group">
-                <label for="widthGSM">GSM</label>
-                <input type="number" id="widthGSM" step="0.001" placeholder="e.g., 320">
+                <label>Container Type</label>
+                <select id="containerType6" onchange="updateContainerSpecs6()">
+                    <option value="20ft-standard">20ft Standard</option>
+                    <option value="40ft-standard" selected>40ft Standard GP</option>
+                    <option value="40ft-hc">40ft High Cube</option>
+                    <option value="45ft-hc">45ft High Cube</option>
+                </select>
             </div>
-            
             <div class="input-group">
-                <label for="widthWeight">Weight (kg)</label>
-                <input type="number" id="widthWeight" step="0.001" placeholder="e.g., 15">
+                <label>Fabric Type</label>
+                <select id="fabricType6" onchange="toggleFabricInputs6()">
+                    <option value="flat-folded">Flat/Folded Pieces</option>
+                    <option value="rolled" selected>Rolled Fabric</option>
+                    <option value="baled">Baled Fabric</option>
+                </select>
             </div>
-            
+            <div class="input-group" id="fabricPresetGroup6">
+                <label>Fabric Preset (Optional)</label>
+                <select id="fabricPreset6" onchange="applyFabricPreset6()">
+                    <option value="custom">Custom</option>
+                    <option value="cotton">Cotton (150-200 GSM)</option>
+                    <option value="polyester">Polyester (100-150 GSM)</option>
+                    <option value="silk">Silk (80-120 GSM)</option>
+                    <option value="denim">Denim (300-400 GSM)</option>
+                    <option value="linen">Linen (150-250 GSM)</option>
+                </select>
+            </div>
             <div class="input-group">
-                <label for="widthLength">Length (meters)</label>
-                <input type="number" id="widthLength" step="0.001" placeholder="e.g., 22">
+                <label>Unit System</label>
+                <div class="unit-system">
+                    <button class="unit-btn active" onclick="setUnit6('metric', event)">Metric</button>
+                    <button class="unit-btn" onclick="setUnit6('imperial', event)">Imperial</button>
+                </div>
             </div>
-            
-            <div id="results5" class="results hidden">
-                <div class="result-row">
-                    <span class="result-label">Width</span>
-                    <span class="result-value" id="widthValue">0.00 in</span>
+            <div class="specs-grid" style="margin-bottom: 20px;">
+                <div class="spec-item"><span class="spec-label">Type</span><span class="spec-value" id="specType6">40ft Standard Container</span></div>
+                <div class="spec-item"><span class="spec-label">Length</span><span class="spec-value" id="specLength6">12.02m</span></div>
+                <div class="spec-item"><span class="spec-label">Width</span><span class="spec-value" id="specWidth6">2.35m</span></div>
+                <div class="spec-item"><span class="spec-label">Height</span><span class="spec-value" id="specHeight6">2.39m</span></div>
+                <div class="spec-item"><span class="spec-label">Volume</span><span class="spec-value" id="specVolume6">67 CBM</span></div>
+                <div class="spec-item"><span class="spec-label">Typical Load Capacity</span><span class="spec-value" id="specPayload6">10-15 tons</span><span class="spec-subtitle">(Depends on fabric type)</span></div>
+            </div>
+            <div class="input-group" style="margin-top:10px;">
+                <label id="widthLabel6">Roll Width (cm)</label>
+                <input type="number" id="width6" step="0.01" placeholder="61" oninput="calculate6()">
+            </div>
+            <div class="input-group">
+                <label id="lengthLabel6">Roll Length (cm)</label>
+                <input type="number" id="length6" step="0.01" placeholder="152" oninput="calculate6()">
+            </div>
+            <div class="input-group" id="heightGroup6">
+                <label id="heightLabel6">Height/Thickness (cm)</label>
+                <input type="number" id="height6" step="0.1" placeholder="5" oninput="calculate6()">
+            </div>
+            <div class="input-group" id="gsmGroup6">
+                <label id="weightLabel6">Weight (GSM)</label>
+                <input type="number" id="weight6" step="1" placeholder="180" oninput="calculate6()">
+            </div>
+            <div class="input-group" id="rollWeightGroup6" style="display: block;">
+                <label id="rollWeightLabel6">Weight per Roll (kg)</label>
+                <input type="number" id="rollWeightInput6" step="0.1" placeholder="25" oninput="calculate6()">
+            </div>
+            <div class="input-group" id="efficiencyGroup6" style="display: block;">
+                <label>Packing Efficiency (%)</label>
+                <input type="number" id="efficiency6" step="1" min="50" max="100" placeholder="70" oninput="calculate6()">
+            </div>
+            <div class="loading-results hidden" id="resultsSection6">
+                <div id="errorContainer6"></div>
+                <div class="loading-row"><span class="loading-label">Maximum Quantity</span><span class="loading-value" id="maxQuantity6">-</span></div>
+                <div class="loading-row"><span class="loading-label">Limiting Factor</span><span class="loading-value" id="limitingFactor6">-</span></div>
+                <div class="loading-row"><span class="loading-label">Volume Utilization</span><span class="loading-value" id="volumeUtil6">-</span></div>
+                <div class="loading-row"><span class="loading-label">Weight Utilization</span><span class="loading-value" id="weightUtil6">-</span></div>
+                <div class="insight-box"><h3>Optimization Insight</h3><p id="insightText6">Container volume is the limiting factor. Consider optimizing the fabric dimensions or stacking arrangement to improve utilization.</p></div>
+                <h3 class="loading-section-title" style="margin-bottom: 12px;">Calculation Details</h3>
+                <div class="details-grid">
+                    <div class="detail-row"><span class="detail-label">Weight per piece:</span><span class="detail-value" id="weightPerPiece6">-</span></div>
+                    <div class="detail-row"><span class="detail-label">Volume per piece:</span><span class="detail-value" id="volumePerPiece6">-</span></div>
+                    <div class="detail-row"><span class="detail-label">Total weight:</span><span class="detail-value" id="totalWeight6">-</span></div>
+                    <div class="detail-row"><span class="detail-label">Total volume:</span><span class="detail-value" id="totalVolume6">-</span></div>
+                    <div class="detail-row"><span class="detail-label">Loading efficiency:</span><span class="detail-value" id="efficiencyDisplay6">-</span></div>
+                </div>
+                <div class="packing-layout">
+                    <h3>Suggested Packing Layout</h3>
+                    <div class="packing-grid">
+                        <div class="packing-item"><div class="packing-label">Pieces per row (length-wise)</div><div class="packing-value" id="piecesLength6">-</div></div>
+                        <div class="packing-item"><div class="packing-label">Pieces per row (width-wise)</div><div class="packing-value" id="piecesWidth6">-</div></div>
+                        <div class="packing-item"><div class="packing-label">Number of layers</div><div class="packing-value" id="layers6">-</div></div>
+                        <div class="packing-item"><div class="packing-label">Pieces per layer</div><div class="packing-value" id="piecesPerLayer6">-</div></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
-        // Calculator 1: Length Calculator (NOW FIRST)
+        // Calculators 1-5: (unchanged)
+        // ... (Identical to your previous JS for calculators 1–5)
+        // ... (Omitted for brevity, as already present above)
+        // --- Calculator 1 ---
         const lengthGSMInput = document.getElementById('lengthGSM');
         const lengthWidthInput = document.getElementById('lengthWidth');
         const lengthWeightInput = document.getElementById('lengthWeight');
@@ -310,137 +331,380 @@
             const gsm = parseFloat(lengthGSMInput.value);
             const width = parseFloat(lengthWidthInput.value);
             const weight = parseFloat(lengthWeightInput.value);
-            
             if (gsm > 0 && width > 0 && weight > 0) {
                 const numerator = weight * 1000 * 100;
                 const denominator = gsm * width * 2.54;
                 const length = numerator / denominator;
-                
                 lengthValueSpan.textContent = length.toFixed(2) + ' m';
-                
                 results1Div.classList.remove('hidden');
             } else {
                 results1Div.classList.add('hidden');
             }
         }
-
         lengthGSMInput.addEventListener('input', calculateLength);
         lengthWidthInput.addEventListener('input', calculateLength);
         lengthWeightInput.addEventListener('input', calculateLength);
-
-        // Calculator 2: Finishing Weight Shortage
+        // --- Calculator 2 ---
         const beforeInput = document.getElementById('beforeWeight');
         const afterInput = document.getElementById('afterWeight');
         const results2Div = document.getElementById('results2');
         const shortageSpan = document.getElementById('shortage');
         const percentageSpan = document.getElementById('percentage');
-
         function calculateShortage() {
             const before = parseFloat(beforeInput.value);
             const after = parseFloat(afterInput.value);
-            
             if (before > 0 && after >= 0 && after <= before) {
                 const shortage = before - after;
                 const percentage = (shortage / before) * 100;
-                
                 shortageSpan.textContent = shortage.toFixed(3) + ' kg';
                 percentageSpan.textContent = percentage.toFixed(2) + '%';
-                
                 results2Div.classList.remove('hidden');
             } else {
                 results2Div.classList.add('hidden');
             }
         }
-
         beforeInput.addEventListener('input', calculateShortage);
         afterInput.addEventListener('input', calculateShortage);
-
-        // Calculator 3: GSM Calculator
+        // --- Calculator 3 ---
         const gsmWeightInput = document.getElementById('gsmWeight');
         const gsmWidthInput = document.getElementById('gsmWidth');
         const gsmLengthInput = document.getElementById('gsmLength');
         const results3Div = document.getElementById('results3');
         const gsmValueSpan = document.getElementById('gsmValue');
-
         function calculateGSM() {
             const weight = parseFloat(gsmWeightInput.value);
             const width = parseFloat(gsmWidthInput.value);
             const length = parseFloat(gsmLengthInput.value);
-            
             if (weight > 0 && width > 0 && length > 0) {
                 const numerator = weight * 1000 * 100;
                 const denominator = width * 2.54 * length;
                 const gsm = numerator / denominator;
-                
                 gsmValueSpan.textContent = Math.round(gsm);
-                
                 results3Div.classList.remove('hidden');
             } else {
                 results3Div.classList.add('hidden');
             }
         }
-
         gsmWeightInput.addEventListener('input', calculateGSM);
         gsmWidthInput.addEventListener('input', calculateGSM);
         gsmLengthInput.addEventListener('input', calculateGSM);
-
-        // Calculator 4: Weight Calculator
+        // --- Calculator 4 ---
         const inputGSMInput = document.getElementById('inputGSM');
         const weightWidthInput = document.getElementById('weightWidth');
         const weightLengthInput = document.getElementById('weightLength');
         const results4Div = document.getElementById('results4');
         const weightValueSpan = document.getElementById('weightValue');
-
         function calculateWeight() {
             const gsm = parseFloat(inputGSMInput.value);
             const width = parseFloat(weightWidthInput.value);
             const length = parseFloat(weightLengthInput.value);
-            
             if (gsm > 0 && width > 0 && length > 0) {
                 const numerator = gsm * width * 2.54 * length;
                 const denominator = 1000 * 100;
                 const weight = numerator / denominator;
-                
                 weightValueSpan.textContent = weight.toFixed(2) + ' kg';
-                
                 results4Div.classList.remove('hidden');
             } else {
                 results4Div.classList.add('hidden');
             }
         }
-
         inputGSMInput.addEventListener('input', calculateWeight);
         weightWidthInput.addEventListener('input', calculateWeight);
         weightLengthInput.addEventListener('input', calculateWeight);
-
-        // Calculator 5: Width Calculator
+        // --- Calculator 5 ---
         const widthGSMInput = document.getElementById('widthGSM');
         const widthWeightInput = document.getElementById('widthWeight');
         const widthLengthInput = document.getElementById('widthLength');
         const results5Div = document.getElementById('results5');
         const widthValueSpan = document.getElementById('widthValue');
-
         function calculateWidthCalc() {
             const gsm = parseFloat(widthGSMInput.value);
             const weight = parseFloat(widthWeightInput.value);
             const length = parseFloat(widthLengthInput.value);
-            
             if (gsm > 0 && weight > 0 && length > 0) {
                 const numerator = weight * 1000 * 100;
                 const denominator = gsm * length * 2.54;
                 const width = numerator / denominator;
-                
                 widthValueSpan.textContent = width.toFixed(2) + ' in';
-                
                 results5Div.classList.remove('hidden');
             } else {
                 results5Div.classList.add('hidden');
             }
         }
-
         widthGSMInput.addEventListener('input', calculateWidthCalc);
         widthWeightInput.addEventListener('input', calculateWidthCalc);
         widthLengthInput.addEventListener('input', calculateWidthCalc);
+        // --- Calculator 6: FULL Container Loading Calculator ---
+        let currentUnit6 = 'metric';
+        const containerSpecs6 = {
+            '20ft-standard': {name: '20ft Standard Container',length: 5.90,width: 2.35,height: 2.39,volume: 33.2,payload: 28.0,typicalLoad: '8-10 tons'},
+            '40ft-standard': {name: '40ft Standard Container',length: 12.02,width: 2.35,height: 2.39,volume: 67.0,payload: 26.7,typicalLoad: '10-15 tons'},
+            '40ft-hc': {name: '40ft High Cube Container',length: 12.02,width: 2.35,height: 2.69,volume: 76.0,payload: 26.5,typicalLoad: '12-18 tons'},
+            '45ft-hc': {name: '45ft High Cube Container',length: 13.55,width: 2.35,height: 2.69,volume: 86.0,payload: 27.0,typicalLoad: '15-20 tons'}
+        };
+        const fabricPresets6 = {'cotton': 175,'polyester': 125,'silk': 100,'denim': 350,'linen': 200};
+        function updatePlaceholders6() {
+            const fabricType = document.getElementById('fabricType6').value;
+            if (currentUnit6 === 'metric') {
+                if (fabricType === 'rolled') {
+                    document.getElementById('width6').placeholder = "61";
+                    document.getElementById('length6').placeholder = "152";
+                    document.getElementById('rollWeightInput6').placeholder = "25";
+                } else {
+                    document.getElementById('width6').placeholder = "1.5";
+                    document.getElementById('length6').placeholder = "2.0";
+                    document.getElementById('height6').placeholder = "5";
+                    document.getElementById('weight6').placeholder = "180";
+                }
+            } else {
+                if (fabricType === 'rolled') {
+                    document.getElementById('width6').placeholder = "24";
+                    document.getElementById('length6').placeholder = "60";
+                    document.getElementById('rollWeightInput6').placeholder = "25";
+                } else {
+                    document.getElementById('width6').placeholder = "59";
+                    document.getElementById('length6').placeholder = "79";
+                    document.getElementById('height6').placeholder = "2";
+                    document.getElementById('weight6').placeholder = "180";
+                }
+            }
+        }
+        function toggleFabricInputs6() {
+            const fabricType = document.getElementById('fabricType6').value;
+            const gsmGroup = document.getElementById('gsmGroup6');
+            const rollWeightGroup = document.getElementById('rollWeightGroup6');
+            const efficiencyGroup = document.getElementById('efficiencyGroup6');
+            const heightGroup = document.getElementById('heightGroup6');
+            const fabricPresetGroup = document.getElementById('fabricPresetGroup6');
+            if (fabricType === 'rolled') {
+                gsmGroup.style.display = 'none';
+                rollWeightGroup.style.display = 'block';
+                efficiencyGroup.style.display = 'block';
+                fabricPresetGroup.style.display = 'none';
+                updateLabels6(); updatePlaceholders6();
+            } else {
+                gsmGroup.style.display = 'block';
+                rollWeightGroup.style.display = 'none';
+                efficiencyGroup.style.display = 'none';
+                heightGroup.style.display = 'block';
+                fabricPresetGroup.style.display = 'block';
+                updateLabels6(); updatePlaceholders6();
+            }
+            calculate6();
+        }
+        function applyFabricPreset6() {
+            const preset = document.getElementById('fabricPreset6').value;
+            if (preset !== 'custom' && fabricPresets6[preset]) {
+                document.getElementById('weight6').value = fabricPresets6[preset];
+                calculate6();
+            }
+        }
+        function updateContainerSpecs6() {
+            const containerType = document.getElementById('containerType6').value;
+            const specs = containerSpecs6[containerType];
+            document.getElementById('specType6').textContent = specs.name;
+            document.getElementById('specLength6').textContent = specs.length + 'm';
+            document.getElementById('specWidth6').textContent = specs.width + 'm';
+            document.getElementById('specHeight6').textContent = specs.height + 'm';
+            document.getElementById('specVolume6').textContent = specs.volume + ' CBM';
+            document.getElementById('specPayload6').textContent = specs.typicalLoad;
+            calculate6();
+        }
+        function setUnit6(unit, event) {
+            const previousUnit = currentUnit6;
+            currentUnit6 = unit;
+            document.querySelectorAll('.unit-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            const width = parseFloat(document.getElementById('width6').value);
+            const length = parseFloat(document.getElementById('length6').value);
+            const height = parseFloat(document.getElementById('height6').value);
+            const rollWeight = parseFloat(document.getElementById('rollWeightInput6').value);
+            if (width && length && height) {
+                if (unit === 'imperial' && previousUnit === 'metric') {
+                    document.getElementById('width6').value = (width * 0.393701).toFixed(2);
+                    document.getElementById('length6').value = (length * 0.393701).toFixed(2);
+                    document.getElementById('height6').value = (height * 0.393701).toFixed(2);
+                } else if (unit === 'metric' && previousUnit === 'imperial') {
+                    document.getElementById('width6').value = (width / 0.393701).toFixed(2);
+                    document.getElementById('length6').value = (length / 0.393701).toFixed(2);
+                    document.getElementById('height6').value = (height / 0.393701).toFixed(2);
+                }
+            }
+            updateLabels6(); updatePlaceholders6(); calculate6();
+        }
+        function updateLabels6() {
+            const fabricType = document.getElementById('fabricType6').value;
+            if (fabricType === 'rolled') {
+                document.getElementById('rollWeightLabel6').textContent = 'Weight per Roll (kg)';
+                document.getElementById('widthLabel6').textContent = currentUnit6 === 'imperial' ? 'Roll Width (in)' : 'Roll Width (cm)';
+                document.getElementById('lengthLabel6').textContent = currentUnit6 === 'imperial' ? 'Roll Length (in)' : 'Roll Length (cm)';
+            } else {
+                document.getElementById('widthLabel6').textContent = currentUnit6 === 'imperial' ? 'Width (in)' : 'Width (m)';
+                document.getElementById('lengthLabel6').textContent = currentUnit6 === 'imperial' ? 'Length (in)' : 'Length (m)';
+                document.getElementById('heightLabel6').textContent = currentUnit6 === 'imperial' ? 'Height/Thickness (in)' : 'Height/Thickness (cm)';
+            }
+        }
+        function calculate6() {
+            const fabricType = document.getElementById('fabricType6').value;
+            let width = parseFloat(document.getElementById('width6').value);
+            let length = parseFloat(document.getElementById('length6').value);
+            let height = parseFloat(document.getElementById('height6').value);
+            const containerType = document.getElementById('containerType6').value;
+            const specs = containerSpecs6[containerType];
+            const containerVolume = specs.volume;
+            const containerMaxWeight = specs.payload * 1000;
+            const containerLength = specs.length;
+            const containerWidth = specs.width;
+            const containerHeight = specs.height;
+            let widthM, lengthM, heightM, weightPerPieceKg, volumePerPiece;
+            if (fabricType === 'rolled') {
+                const rollWeight = parseFloat(document.getElementById('rollWeightInput6').value);
+                const efficiency = parseFloat(document.getElementById('efficiency6').value) || 100;
+                if (!width || !length || !rollWeight || !efficiency) {
+                    document.getElementById('resultsSection6').classList.add('hidden'); return;
+                }
+                if (currentUnit6 === 'imperial') {
+                    widthM = width * 0.0254;
+                    lengthM = length * 0.0254;
+                } else {
+                    widthM = width / 100;
+                    lengthM = length / 100;
+                }
+                weightPerPieceKg = rollWeight;
+                document.getElementById('resultsSection6').classList.remove('hidden');
+                const radius = widthM / 2;
+                volumePerPiece = Math.PI * radius * radius * lengthM;
+                const maxByVolumeTheoretical = Math.floor(containerVolume / volumePerPiece);
+                const maxByVolume = Math.floor(maxByVolumeTheoretical * (efficiency / 100));
+                const maxByWeight = Math.floor(containerMaxWeight / weightPerPieceKg);
+                const maxQuantity = Math.min(maxByVolume, maxByWeight);
+                const limitingFactor = (maxQuantity === maxByVolume) ? 'Volume' : 'Weight';
+                const totalVolume = maxQuantity * volumePerPiece;
+                const totalWeight = maxQuantity * weightPerPieceKg;
+                const volumeUtilization = (totalVolume / containerVolume) * 100;
+                const weightUtilization = (totalWeight / containerMaxWeight) * 100;
+                const actualLoadingEfficiency = Math.min(volumeUtilization, weightUtilization);
+                const rollDiameter = widthM;
+                const rollHeight = lengthM;
+                const piecesLengthWise = Math.floor(containerLength / rollDiameter);
+                const piecesWidthWise = Math.floor(containerWidth / rollDiameter);
+                const layers = Math.floor(containerHeight / rollHeight);
+                const piecesPerLayer = piecesLengthWise * piecesWidthWise;
+                document.getElementById('maxQuantity6').textContent = maxQuantity + ' rolls';
+                document.getElementById('limitingFactor6').textContent = limitingFactor;
+                document.getElementById('volumeUtil6').textContent = volumeUtilization.toFixed(1) + '%';
+                document.getElementById('weightUtil6').textContent = weightUtilization.toFixed(1) + '%';
+                document.getElementById('weightPerPiece6').textContent = (weightPerPieceKg ? weightPerPieceKg.toFixed(2) : '-') + ' kg';
+                document.getElementById('volumePerPiece6').textContent = (volumePerPiece * 1000).toFixed(2) + ' L / ' + volumePerPiece.toFixed(3) + ' CBM';
+                document.getElementById('totalWeight6').textContent = (totalWeight / 1000).toFixed(2) + ' tons';
+                document.getElementById('totalVolume6').textContent = totalVolume.toFixed(2) + ' CBM / ' + (totalVolume * 1000).toFixed(2) + ' L';
+                document.getElementById('efficiencyDisplay6').textContent = actualLoadingEfficiency.toFixed(1) + '% (Actual)';
+                document.getElementById('piecesLength6').textContent = piecesLengthWise;
+                document.getElementById('piecesWidth6').textContent = piecesWidthWise;
+                document.getElementById('layers6').textContent = layers;
+                document.getElementById('piecesPerLayer6').textContent = piecesPerLayer;
+                const errorContainer = document.getElementById('errorContainer6');
+                errorContainer.innerHTML = '';
+                if (rollDiameter > containerWidth || rollDiameter > containerLength) {
+                    errorContainer.innerHTML = `<div class="error-box"><h3>⚠️ Dimension Error</h3><p>Roll diameter (${rollDiameter.toFixed(2)}m) exceeds container dimensions. Please reduce roll width.</p></div>`;
+                }
+                if (rollHeight > containerHeight) {
+                    errorContainer.innerHTML += `<div class="error-box"><h3>⚠️ Dimension Error</h3><p>Roll length (${rollHeight.toFixed(2)}m) exceeds container height (${containerHeight}m). Consider laying rolls horizontally.</p></div>`;
+                }
+                let insightText;
+                if (efficiency < 70) {
+                    insightText = `Packing efficiency is ${efficiency}% (low). For bouncy/bulky fabrics like fox fur, 60-80% is realistic. Volume is the limiting factor.`;
+                } else if (efficiency >= 90) {
+                    insightText = `Packing efficiency is ${efficiency}% (very high). Ensure this doesn't compress or damage the fabric. Volume is the limiting factor.`;
+                } else {
+                    insightText = `Packing efficiency is ${efficiency}% (good). This is realistic for most rolled fabrics. ${limitingFactor} is the limiting factor.`;
+                }
+                document.getElementById('insightText6').textContent = insightText;
+            } else {
+                const gsm = parseFloat(document.getElementById('weight6').value);
+                if (!width || !length || !height || !gsm) {
+                    document.getElementById('resultsSection6').classList.add('hidden'); return;
+                }
+                if (currentUnit6 === 'imperial') {
+                    widthM = width * 0.0254;
+                    lengthM = length * 0.0254;
+                    heightM = height * 0.0254;
+                } else {
+                    widthM = width;
+                    lengthM = length;
+                    heightM = height / 100;
+                }
+                document.getElementById('resultsSection6').classList.remove('hidden');
+                const errorContainer = document.getElementById('errorContainer6');
+                errorContainer.innerHTML = '';
+                if (lengthM > containerLength) {
+                    errorContainer.innerHTML = `<div class="error-box"><h3>⚠️ Dimension Error</h3><p>Fabric length (${lengthM.toFixed(2)}m) exceeds container length (${containerLength}m). Please reduce fabric length or choose a larger container.</p></div>`;
+                }
+                if (widthM > containerWidth) {
+                    errorContainer.innerHTML += `<div class="error-box"><h3>⚠️ Dimension Error</h3><p>Fabric width (${widthM.toFixed(2)}m) exceeds container width (${containerWidth}m). Please reduce fabric width.</p></div>`;
+                }
+                if (heightM > containerHeight) {
+                    errorContainer.innerHTML += `<div class="error-box"><h3>⚠️ Dimension Error</h3><p>Fabric height (${heightM.toFixed(2)}m) exceeds container height (${containerHeight}m). Please reduce fabric thickness.</p></div>`;
+                }
+                volumePerPiece = widthM * lengthM * heightM;
+                const volumePerPieceLiters = volumePerPiece * 1000;
+                const fabricAreaM2 = widthM * lengthM;
+                weightPerPieceKg = (fabricAreaM2 * gsm) / 1000;
+                const piecesLengthWise = Math.floor(containerLength / lengthM);
+                const piecesWidthWise = Math.floor(containerWidth / widthM);
+                const layers = Math.floor(containerHeight / heightM);
+                const piecesPerLayer = piecesLengthWise * piecesWidthWise;
+                const maxByLayout = piecesPerLayer * layers;
+                const maxByVolume = Math.floor(containerVolume / volumePerPiece);
+                const maxByWeight = Math.floor(containerMaxWeight / weightPerPieceKg);
+                const maxQuantity = Math.min(maxByVolume, maxByWeight, maxByLayout);
+                let limitingFactor;
+                if (maxQuantity === maxByLayout) {
+                    limitingFactor = 'Layout';
+                } else if (maxQuantity === maxByVolume) {
+                    limitingFactor = 'Volume';
+                } else {
+                    limitingFactor = 'Weight';
+                }
+                const totalVolume = maxQuantity * volumePerPiece;
+                const totalWeight = maxQuantity * weightPerPieceKg;
+                const volumeUtilization = (totalVolume / containerVolume) * 100;
+                const weightUtilization = (totalWeight / containerMaxWeight) * 100;
+                const loadingEfficiency = Math.min(volumeUtilization, weightUtilization);
+                document.getElementById('maxQuantity6').textContent = maxQuantity + ' pieces';
+                document.getElementById('limitingFactor6').textContent = limitingFactor;
+                document.getElementById('volumeUtil6').textContent = volumeUtilization.toFixed(1) + '%';
+                document.getElementById('weightUtil6').textContent = weightUtilization.toFixed(1) + '%';
+                document.getElementById('weightPerPiece6').textContent = weightPerPieceKg.toFixed(2) + ' kg';
+                document.getElementById('volumePerPiece6').textContent = volumePerPieceLiters.toFixed(2) + ' L / ' + volumePerPiece.toFixed(3) + ' CBM';
+                document.getElementById('totalWeight6').textContent = (totalWeight / 1000).toFixed(2) + ' tons';
+                document.getElementById('totalVolume6').textContent = totalVolume.toFixed(2) + ' CBM / ' + (totalVolume * 1000).toFixed(2) + ' L';
+                document.getElementById('efficiencyDisplay6').textContent = loadingEfficiency.toFixed(0) + '%';
+                document.getElementById('piecesLength6').textContent = piecesLengthWise;
+                document.getElementById('piecesWidth6').textContent = piecesWidthWise;
+                document.getElementById('layers6').textContent = layers;
+                document.getElementById('piecesPerLayer6').textContent = piecesPerLayer;
+                let insightText;
+                if (limitingFactor === 'Volume') {
+                    insightText = 'Container volume is the limiting factor. Consider optimizing the fabric dimensions or stacking arrangement to improve utilization.';
+                } else if (limitingFactor === 'Weight') {
+                    insightText = 'Container weight capacity is the limiting factor. Consider using lighter fabrics or reducing piece dimensions to maximize space utilization.';
+                } else {
+                    insightText = "Physical layout is the limiting factor. The fabric dimensions don't pack efficiently in this container. Consider adjusting dimensions for better fit.";
+                }
+                document.getElementById('insightText6').textContent = insightText;
+            }
+        }
+        function initContainerCal6() {
+            updateContainerSpecs6();
+            toggleFabricInputs6();
+            updatePlaceholders6();
+        }
+        // Attach events
+        document.getElementById('containerType6').addEventListener('change', updateContainerSpecs6);
+        document.getElementById('fabricType6').addEventListener('change', toggleFabricInputs6);
+        document.getElementById('fabricPreset6').addEventListener('change', applyFabricPreset6);
+        window.onload = initContainerCal6;
     </script>
 </body>
 </html>
